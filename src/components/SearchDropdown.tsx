@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Clock, X } from "lucide-react";
+import { Search, Clock, X, TrendingUp } from "lucide-react";
 import { useTools } from "@/hooks/useTools";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const RECENT_SEARCHES_KEY = "vibecheck_recent_searches";
 const MAX_RECENT_SEARCHES = 5;
+const MAX_TRENDING = 5;
 
 interface RecentSearch {
   id: string;
@@ -55,7 +56,13 @@ const SearchDropdown = () => {
     tool.name.toLowerCase().includes(query.toLowerCase())
   ) ?? [];
 
-  const showRecent = query === "" && recentSearches.length > 0;
+  // Get trending tools (sorted by trendPercent7d, top 5)
+  const trendingTools = [...(tools ?? [])]
+    .sort((a, b) => b.trendPercent7d - a.trendPercent7d)
+    .slice(0, MAX_TRENDING);
+
+  const hasRecentSearches = recentSearches.length > 0;
+  const showInitialState = query === "";
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -113,12 +120,18 @@ const SearchDropdown = () => {
     setImageErrors(prev => ({ ...prev, [toolId]: true }));
   };
 
-  const renderToolItem = (tool: { id: string; name: string; company: string; logo?: string }, isRecent = false) => (
+  const renderToolItem = (
+    tool: { id: string; name: string; company: string; logo?: string },
+    options?: { isRecent?: boolean; isTrending?: boolean }
+  ) => (
     <button
       key={tool.id}
       onClick={() => handleSelect(tool)}
       className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-accent transition-colors duration-150 text-left group"
     >
+      {options?.isTrending && (
+        <TrendingUp className="w-4 h-4 text-muted-foreground shrink-0" />
+      )}
       <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center shrink-0">
         {tool.logo && !imageErrors[tool.id] ? (
           <img
@@ -137,7 +150,7 @@ const SearchDropdown = () => {
         <p className="text-sm font-medium text-foreground truncate">{tool.name}</p>
         <p className="text-xs text-muted-foreground truncate">{tool.company}</p>
       </div>
-      {isRecent && (
+      {options?.isRecent && (
         <button
           onClick={(e) => handleRemoveRecent(e, tool.id)}
           className="opacity-0 group-hover:opacity-100 p-1 rounded-md hover:bg-secondary transition-all duration-150"
@@ -170,18 +183,36 @@ const SearchDropdown = () => {
       {/* Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-xl shadow-lg z-50 overflow-hidden">
-          <ScrollArea className="max-h-80">
-            {/* Recent Searches */}
-            {showRecent && (
-              <div className="py-2">
-                <div className="px-4 py-2 flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    Zuletzt gesucht
-                  </span>
-                </div>
-                {recentSearches.map((search) => renderToolItem(search, true))}
-              </div>
+          <ScrollArea className="max-h-96">
+            {/* Initial state: Recent + Trending */}
+            {showInitialState && (
+              <>
+                {/* Recent Searches */}
+                {hasRecentSearches && (
+                  <div className="py-2 border-b border-border">
+                    <div className="px-4 py-2 flex items-center gap-2">
+                      <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Zuletzt gesucht
+                      </span>
+                    </div>
+                    {recentSearches.map((search) => renderToolItem(search, { isRecent: true }))}
+                  </div>
+                )}
+
+                {/* Trending */}
+                {trendingTools.length > 0 && (
+                  <div className="py-2">
+                    <div className="px-4 py-2 flex items-center gap-2">
+                      <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Trending
+                      </span>
+                    </div>
+                    {trendingTools.map((tool) => renderToolItem(tool, { isTrending: true }))}
+                  </div>
+                )}
+              </>
             )}
 
             {/* Search Results */}
@@ -197,13 +228,6 @@ const SearchDropdown = () => {
                   </div>
                 )}
               </>
-            )}
-
-            {/* Empty state when no query and no recent */}
-            {query === "" && recentSearches.length === 0 && (
-              <div className="py-6 text-center text-sm text-muted-foreground">
-                Beginne mit der Suche...
-              </div>
             )}
           </ScrollArea>
         </div>
