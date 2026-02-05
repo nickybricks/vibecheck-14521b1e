@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import MiniSparkline from "./MiniSparkline";
@@ -18,6 +19,8 @@ const formatMentions = (mentions: number): string => {
 };
 
 const ToolCard = ({ tool }: ToolCardProps) => {
+  const [imageError, setImageError] = useState(false);
+  
   const total = tool.sentiment.positive + tool.sentiment.neutral + tool.sentiment.negative;
   const positivePercent = total > 0 ? Math.round((tool.sentiment.positive / total) * 100) : 0;
   const negativePercent = total > 0 ? Math.round((tool.sentiment.negative / total) * 100) : 0;
@@ -38,8 +41,13 @@ const ToolCard = ({ tool }: ToolCardProps) => {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center overflow-hidden">
-                {tool.logo ? (
-                  <img src={tool.logo} alt={tool.name} className="w-6 h-6 object-contain" />
+                {tool.logo && !imageError ? (
+                  <img 
+                    src={tool.logo} 
+                    alt={tool.name} 
+                    className="w-6 h-6 object-contain"
+                    onError={() => setImageError(true)}
+                  />
                 ) : (
                   <span className="text-base font-semibold text-muted-foreground">
                     {tool.name.charAt(0)}
