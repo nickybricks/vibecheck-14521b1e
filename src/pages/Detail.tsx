@@ -111,7 +111,12 @@ const Detail = () => {
               )}
             </div>
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight">{tool.name}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-semibold tracking-tight">{tool.name}</h1>
+                <Badge variant="secondary" className="rounded-full px-2.5 py-0.5">
+                  <TrendIndicator trend={tool.trend} className="text-xs" />
+                </Badge>
+              </div>
               <p className="text-muted-foreground">{tool.company}</p>
             </div>
           </div>
@@ -134,7 +139,7 @@ const Detail = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <Card className="rounded-2xl border-border/50">
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground mb-1">Sentiment</p>
@@ -147,12 +152,6 @@ const Detail = () => {
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground mb-1">Mentions</p>
               <p className="text-2xl font-semibold">{tool.mentions.toLocaleString()}</p>
-            </CardContent>
-          </Card>
-          <Card className="rounded-2xl border-border/50">
-            <CardContent className="p-5">
-              <p className="text-sm text-muted-foreground mb-1">Trend</p>
-              <TrendIndicator trend={tool.trend} className="text-xl" />
             </CardContent>
           </Card>
         </div>
