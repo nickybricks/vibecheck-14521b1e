@@ -1315,73 +1315,6 @@ const mockTools: Tool[] = [
 ];
 
 // =============================================================================
-// VERSION MAPPINGS - Real versions for each tool
-// =============================================================================
-
-const toolVersions: Record<string, { versions: string[]; currentVersion: string }> = {
-  // OpenAI
-  "gpt-4o": { versions: ["GPT-4o", "GPT-4o-mini", "GPT-4o-2024-11-20", "GPT-4o-2024-08-06", "GPT-4o-2024-05-13"], currentVersion: "GPT-4o" },
-  "gpt-4-turbo": { versions: ["GPT-4 Turbo", "GPT-4 Turbo Preview", "GPT-4-0125-preview", "GPT-4-1106-preview"], currentVersion: "GPT-4 Turbo" },
-  "gpt-5": { versions: ["GPT-5", "GPT-5-preview"], currentVersion: "GPT-5" },
-  "gpt-5-2": { versions: ["GPT-5.2", "GPT-5.2-preview", "GPT-5.1"], currentVersion: "GPT-5.2" },
-  
-  // Anthropic
-  "claude-3-opus": { versions: ["Claude 3 Opus", "Claude 3 Opus 20240229"], currentVersion: "Claude 3 Opus" },
-  "claude-3-5-sonnet": { versions: ["Claude 3.5 Sonnet", "Claude 3.5 Sonnet v2", "Claude 3.5 Sonnet 20241022", "Claude 3.5 Sonnet 20240620"], currentVersion: "Claude 3.5 Sonnet" },
-  "claude-4": { versions: ["Claude 4", "Claude 4 Opus", "Claude 4 Sonnet"], currentVersion: "Claude 4" },
-  "claude-4-5": { versions: ["Claude 4.5", "Claude 4.5 Opus", "Claude 4.5 Sonnet", "Claude 4.5 Haiku"], currentVersion: "Claude 4.5" },
-  
-  // Google
-  "gemini-1-5-pro": { versions: ["Gemini 1.5 Pro", "Gemini 1.5 Pro 002", "Gemini 1.5 Pro 001", "Gemini 1.5 Flash"], currentVersion: "Gemini 1.5 Pro" },
-  "gemini-2-0-flash": { versions: ["Gemini 2.0 Flash", "Gemini 2.0 Flash Thinking", "Gemini 2.0 Flash Lite"], currentVersion: "Gemini 2.0 Flash" },
-  "gemini-2-5-pro": { versions: ["Gemini 2.5 Pro", "Gemini 2.5 Pro Preview", "Gemini 2.5 Flash"], currentVersion: "Gemini 2.5 Pro" },
-  "gemini-3-pro": { versions: ["Gemini 3 Pro", "Gemini 3 Pro Preview"], currentVersion: "Gemini 3 Pro" },
-  "gemini-3-flash": { versions: ["Gemini 3 Flash", "Gemini 3 Flash Lite"], currentVersion: "Gemini 3 Flash" },
-  
-  // Meta
-  "llama-3": { versions: ["Llama 3 70B", "Llama 3 8B", "Llama 3 70B Instruct", "Llama 3 8B Instruct"], currentVersion: "Llama 3 70B" },
-  "llama-4-maverick": { versions: ["Llama 4 Maverick 400B", "Llama 4 Maverick 100B"], currentVersion: "Llama 4 Maverick 400B" },
-  "llama-4-scout": { versions: ["Llama 4 Scout 100B", "Llama 4 Scout 50B"], currentVersion: "Llama 4 Scout 100B" },
-  
-  // Mistral
-  "mistral-large": { versions: ["Mistral Large 2", "Mistral Large", "Mistral Large 2411", "Mistral Large 2407"], currentVersion: "Mistral Large 2" },
-  "mistral-medium": { versions: ["Mistral Medium", "Mistral Medium 2312"], currentVersion: "Mistral Medium" },
-  "mixtral-8x7b": { versions: ["Mixtral 8x7B", "Mixtral 8x7B Instruct"], currentVersion: "Mixtral 8x7B" },
-  "mixtral-8x22b": { versions: ["Mixtral 8x22B", "Mixtral 8x22B Instruct"], currentVersion: "Mixtral 8x22B" },
-  
-  // DeepSeek
-  "deepseek-v3": { versions: ["DeepSeek V3", "DeepSeek V3 Base"], currentVersion: "DeepSeek V3" },
-  "deepseek-v4": { versions: ["DeepSeek V4", "DeepSeek V4 Reasoning", "DeepSeek V4 Base"], currentVersion: "DeepSeek V4" },
-  "deepseek-coder": { versions: ["DeepSeek Coder V2", "DeepSeek Coder V2 Lite", "DeepSeek Coder 33B", "DeepSeek Coder 6.7B"], currentVersion: "DeepSeek Coder V2" },
-  
-  // xAI
-  "grok-3": { versions: ["Grok 3", "Grok 3 Mini"], currentVersion: "Grok 3" },
-  "grok-4": { versions: ["Grok 4", "Grok 4 Reasoning", "Grok 4 Vision"], currentVersion: "Grok 4" },
-  
-  // Cohere
-  "command-r-plus": { versions: ["Command R+", "Command R+ 08-2024", "Command R+ 04-2024"], currentVersion: "Command R+" },
-  "command-r": { versions: ["Command R", "Command R 08-2024", "Command R 03-2024"], currentVersion: "Command R" },
-  
-  // Others
-  "perplexity-online": { versions: ["Perplexity Online", "Perplexity Pro", "Perplexity Standard"], currentVersion: "Perplexity Online" },
-  "qwen-2-5": { versions: ["Qwen 2.5 72B", "Qwen 2.5 32B", "Qwen 2.5 14B", "Qwen 2.5 7B", "Qwen 2.5 Coder"], currentVersion: "Qwen 2.5 72B" },
-  "qwen-2": { versions: ["Qwen 2 72B", "Qwen 2 57B", "Qwen 2 7B"], currentVersion: "Qwen 2 72B" },
-  "yi-large": { versions: ["Yi-Large", "Yi-Large Turbo", "Yi-Medium"], currentVersion: "Yi-Large" },
-  "gemma-2": { versions: ["Gemma 2 27B", "Gemma 2 9B", "Gemma 2 2B"], currentVersion: "Gemma 2 27B" },
-  "gemma-3": { versions: ["Gemma 3 27B", "Gemma 3 12B", "Gemma 3 4B", "Gemma 3 1B"], currentVersion: "Gemma 3 27B" },
-  "phi-3": { versions: ["Phi-3 Medium", "Phi-3 Small", "Phi-3 Mini"], currentVersion: "Phi-3 Medium" },
-  "phi-4": { versions: ["Phi-4", "Phi-4 Mini", "Phi-4 Multimodal"], currentVersion: "Phi-4" },
-  "dbrx": { versions: ["DBRX Instruct", "DBRX Base"], currentVersion: "DBRX Instruct" },
-  "falcon-180b": { versions: ["Falcon 180B", "Falcon 180B Chat", "Falcon 40B"], currentVersion: "Falcon 180B" },
-  "inflection-pi": { versions: ["Inflection 2.5", "Inflection 2", "Inflection 1"], currentVersion: "Inflection 2.5" },
-  
-  // Tools - Default versioning
-};
-
-// Default versions for tools without specific mapping
-const defaultToolVersions = { versions: ["v2.0", "v1.5", "v1.0"], currentVersion: "v2.0" };
-
-// =============================================================================
 // API FUNCTIONS - Update these to use real fetch calls when API is ready
 // =============================================================================
 
@@ -1407,15 +1340,12 @@ export async function fetchToolDetail(id: string): Promise<ToolDetail | null> {
   const tool = mockTools.find((t) => t.id === id);
   if (!tool) return null;
   
-  // Get versions from mapping or use defaults
-  const versionInfo = toolVersions[tool.id] || defaultToolVersions;
-  
   // Generate detail object
   return {
     ...tool,
     description: `${tool.name} ist ein führendes ${tool.type === "llm" ? "Sprachmodell" : "AI-Tool"} von ${tool.company}.`,
-    versions: versionInfo.versions,
-    currentVersion: versionInfo.currentVersion,
+    versions: tool.type === "llm" ? ["Latest", "Previous"] : ["v2.0", "v1.0"],
+    currentVersion: tool.type === "llm" ? "Latest" : "v2.0",
     bestFor: tool.type === "llm" 
       ? ["Konversation", "Code-Generierung", "Textanalyse", "Kreatives Schreiben"]
       : ["Produktivität", "Automatisierung", "Kreativität", "Zusammenarbeit"],
