@@ -185,6 +185,7 @@ const Detail = () => {
                     fontSize={12}
                     axisLine={false}
                     tickLine={false}
+                    width={40}
                     tickFormatter={(value) => {
                       if (value >= 1000000) return `${(value / 1000000).toFixed(0)}M`;
                       if (value >= 1000) return `${(value / 1000).toFixed(0)}k`;
