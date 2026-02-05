@@ -1,10 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import SentimentBar from "@/components/SentimentBar";
 import TrendIndicator from "@/components/TrendIndicator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -21,60 +22,55 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-// Placeholder data - will be replaced with API fetch
-const mockDetail = {
-  id: "chatgpt",
-  name: "ChatGPT",
-  company: "OpenAI",
-  logo: undefined,
-  description: "Ein leistungsstarkes LLM für natürliche Sprachverarbeitung und Konversation.",
-  versions: ["GPT-4o", "GPT-4", "GPT-3.5"],
-  currentVersion: "GPT-4o",
-  sentiment: { positive: 72, neutral: 20, negative: 8 },
-  mentions: 45230,
-  trend: "up" as const,
-  type: "llm" as const,
-  bestFor: ["Konversation", "Code-Generierung", "Textanalyse", "Kreatives Schreiben"],
-  rating: 4.5,
-  trendData: [
-    { date: "Jan", mentions: 35000, sentiment: 68 },
-    { date: "Feb", mentions: 38000, sentiment: 70 },
-    { date: "Mär", mentions: 42000, sentiment: 71 },
-    { date: "Apr", mentions: 40000, sentiment: 69 },
-    { date: "Mai", mentions: 43000, sentiment: 72 },
-    { date: "Jun", mentions: 45230, sentiment: 72 },
-  ],
-  recentMentions: [
-    {
-      id: "1",
-      source: "Twitter",
-      text: "ChatGPT hat mir gerade geholfen, einen komplexen Bug zu finden. Unglaublich nützlich!",
-      date: "vor 2 Stunden",
-      sentiment: "positive",
-    },
-    {
-      id: "2",
-      source: "Reddit",
-      text: "Die neuen GPT-4o Funktionen sind wirklich beeindruckend.",
-      date: "vor 5 Stunden",
-      sentiment: "positive",
-    },
-    {
-      id: "3",
-      source: "Hacker News",
-      text: "Interessante Diskussion über die Grenzen von ChatGPT bei mathematischen Problemen.",
-      date: "vor 1 Tag",
-      sentiment: "neutral",
-    },
-  ],
-};
+import { useToolDetail } from "@/hooks/useTools";
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // In production, fetch data based on id
-  const tool = mockDetail;
+  const { data: tool, isLoading, error } = useToolDetail(id);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="container mx-auto px-6 pt-24 pb-12">
+          <Skeleton className="h-5 w-40 mb-6" />
+          <div className="flex items-center gap-4 mb-8">
+            <Skeleton className="w-16 h-16 rounded-2xl" />
+            <div>
+              <Skeleton className="h-7 w-32 mb-2" />
+              <Skeleton className="h-5 w-20" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-24 rounded-2xl" />
+            ))}
+          </div>
+          <Skeleton className="h-80 rounded-2xl" />
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !tool) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="container mx-auto px-6 pt-24 pb-12">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Zurück zum Dashboard
+          </Link>
+          <div className="text-center py-12">
+            <p className="text-destructive">Tool nicht gefunden.</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   const sentimentPercent = Math.round(
     (tool.sentiment.positive / 
