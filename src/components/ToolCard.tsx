@@ -2,22 +2,10 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import SentimentBar from "./SentimentBar";
 import TrendIndicator from "./TrendIndicator";
+import type { Tool } from "@/types/api";
 
-export interface ToolData {
-  id: string;
-  rank: number;
-  name: string;
-  company: string;
-  logo?: string;
-  sentiment: {
-    positive: number;
-    neutral: number;
-    negative: number;
-  };
-  mentions: number;
-  trend: "up" | "down" | "stable";
-  type: "llm" | "tool";
-}
+// Re-export for backwards compatibility
+export type ToolData = Tool;
 
 interface ToolCardProps {
   tool: ToolData;
