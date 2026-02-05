@@ -17,6 +17,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 72, neutral: 20, negative: 8 },
     mentions: 45230,
     trend: "up",
+    trendPercent7d: 23,
+    sparklineData: [32, 38, 35, 42, 40, 45, 48],
     type: "llm",
   },
   {
@@ -27,6 +29,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 78, neutral: 18, negative: 4 },
     mentions: 32150,
     trend: "up",
+    trendPercent7d: 18,
+    sparklineData: [25, 28, 27, 30, 29, 31, 33],
     type: "llm",
   },
   {
@@ -37,6 +41,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 65, neutral: 25, negative: 10 },
     mentions: 28400,
     trend: "stable",
+    trendPercent7d: 2,
+    sparklineData: [28, 27, 28, 29, 28, 28, 29],
     type: "llm",
   },
   {
@@ -47,6 +53,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 85, neutral: 12, negative: 3 },
     mentions: 18750,
     trend: "up",
+    trendPercent7d: 35,
+    sparklineData: [12, 14, 15, 16, 17, 18, 19],
     type: "tool",
   },
   {
@@ -57,6 +65,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 70, neutral: 22, negative: 8 },
     mentions: 24300,
     trend: "stable",
+    trendPercent7d: -3,
+    sparklineData: [25, 24, 25, 24, 24, 25, 24],
     type: "tool",
   },
   {
@@ -67,6 +77,8 @@ const mockTools: Tool[] = [
     sentiment: { positive: 82, neutral: 13, negative: 5 },
     mentions: 35600,
     trend: "down",
+    trendPercent7d: -12,
+    sparklineData: [42, 40, 38, 37, 36, 35, 34],
     type: "tool",
   },
 ];
@@ -83,6 +95,8 @@ const mockToolDetails: Record<string, ToolDetail> = {
     sentiment: { positive: 72, neutral: 20, negative: 8 },
     mentions: 45230,
     trend: "up",
+    trendPercent7d: 23,
+    sparklineData: [32, 38, 35, 42, 40, 45, 48],
     type: "llm",
     bestFor: ["Konversation", "Code-Generierung", "Textanalyse", "Kreatives Schreiben"],
     rating: 4.5,
