@@ -12,12 +12,15 @@ const Index = () => {
   const { data: tools, isLoading, error } = useTools();
   const { t } = useLanguage();
 
-  const filteredTools = tools?.filter((tool) => {
+  // Filter, sort by mentions (descending), and assign dynamic ranks
+  const filteredTools = (tools?.filter((tool) => {
     if (activeTab === "all") return true;
     if (activeTab === "llms") return tool.type === "llm";
     if (activeTab === "tools") return tool.type === "tool";
     return true;
-  }) ?? [];
+  }) ?? [])
+    .sort((a, b) => b.mentions - a.mentions)
+    .map((tool, index) => ({ ...tool, rank: index + 1 }));
 
   return (
     <div className="min-h-screen bg-background">
