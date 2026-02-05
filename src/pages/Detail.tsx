@@ -139,9 +139,9 @@ const Detail = () => {
           </Select>
         </div>
 
-        {/* Stats Row - Sentiment, Rating (mobile order), Mentions */}
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-4 mb-8">
-          <Card className="rounded-2xl border-border/50 order-1">
+        {/* Stats Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <Card className="rounded-2xl border-border/50">
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground mb-1">{t("sentiment")}</p>
               <p className="text-2xl font-semibold text-[hsl(var(--sentiment-positive))]">
@@ -149,16 +149,7 @@ const Detail = () => {
               </p>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border-border/50 order-2 md:order-3">
-            <CardContent className="p-5">
-              <p className="text-sm text-muted-foreground mb-1">{t("rating")}</p>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-semibold">{tool.rating.toFixed(1)}</span>
-                <span className="text-muted-foreground">/ 5.0</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="rounded-2xl border-border/50 order-3 md:order-2">
+          <Card className="rounded-2xl border-border/50">
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground mb-1">{t("mentions")}</p>
               <p className="text-2xl font-semibold">{tool.mentions.toLocaleString()}</p>
@@ -220,31 +211,44 @@ const Detail = () => {
           </CardContent>
         </Card>
 
-        {/* Best For */}
-        <Card className="rounded-2xl border-border/50 mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">{t("bestFor")}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {tool.bestFor.map((tag) => (
-                <Badge 
-                  key={tag} 
-                  variant="secondary"
-                  className="rounded-full px-3 py-1 text-sm"
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-            <SentimentBar 
-              positive={tool.sentiment.positive}
-              neutral={tool.sentiment.neutral}
-              negative={tool.sentiment.negative}
-              className="mt-4"
-            />
-          </CardContent>
-        </Card>
+        {/* Best For + Rating */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card className="rounded-2xl border-border/50">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">{t("bestFor")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {tool.bestFor.map((tag) => (
+                  <Badge 
+                    key={tag} 
+                    variant="secondary"
+                    className="rounded-full px-3 py-1 text-sm"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="rounded-2xl border-border/50">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">{t("rating")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <span className="text-3xl font-semibold">{tool.rating.toFixed(1)}</span>
+                <span className="text-muted-foreground">/ 5.0</span>
+              </div>
+              <SentimentBar 
+                positive={tool.sentiment.positive}
+                neutral={tool.sentiment.neutral}
+                negative={tool.sentiment.negative}
+                className="mt-4"
+              />
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Recent Mentions */}
         <Card className="rounded-2xl border-border/50">
