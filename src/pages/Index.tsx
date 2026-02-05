@@ -26,7 +26,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-6 pt-24 pb-12">
+      <main className="container mx-auto px-6 pt-6 pb-12">
         {/* Mobile Search - above tabs */}
         <div className="md:hidden mb-4">
           <SearchDropdown />
