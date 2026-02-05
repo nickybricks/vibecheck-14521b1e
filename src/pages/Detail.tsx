@@ -180,6 +180,7 @@ const Detail = () => {
                     tickLine={false}
                   />
                   <YAxis 
+                    orientation="right"
                     stroke="hsl(var(--muted-foreground))"
                     fontSize={12}
                     axisLine={false}
