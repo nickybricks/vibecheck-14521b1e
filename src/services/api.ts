@@ -31,7 +31,7 @@ const companyLogos: Record<string, string> = {
   
   // Tool Companies
   "Cursor Inc.": "https://cursor.sh/apple-touch-icon.png",
-  "Lovable": "https://lovable.dev/icon-512x512.png",
+  "Lovable": "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/lovable-color.png",
   "Vercel": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
   "StackBlitz": "https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg",
   "Replit": "https://replit.com/public/icons/favicon-196.png",
