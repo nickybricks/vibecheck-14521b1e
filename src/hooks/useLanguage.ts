@@ -20,7 +20,16 @@ type TranslationKey =
   | "selectModel"
   | "all"
   | "llms"
-  | "tools";
+  | "tools"
+  | "errorLoading"
+  | "search"
+  | "searchPlaceholder"
+  | "noResults"
+  | "days7"
+  | "outOf"
+  | "recentlySearched"
+  | "trending"
+  | "remove";
 
 type Translations = Record<TranslationKey, string>;
 
@@ -46,6 +55,15 @@ const translations: Record<string, Translations> = {
     all: "All",
     llms: "🧠 LLMs",
     tools: "🔧 Tools",
+    errorLoading: "Error loading data.",
+    search: "Search",
+    searchPlaceholder: "Search tools...",
+    noResults: "No results found.",
+    days7: "7d",
+    outOf: "out of",
+    recentlySearched: "Recently searched",
+    trending: "Trending",
+    remove: "Remove",
   },
   de: {
     backToDashboard: "Zurück zum Dashboard",
@@ -62,12 +80,21 @@ const translations: Record<string, Translations> = {
     trendLast6Months: "Trend der letzten 6 Monate",
     bestFor: "Best For",
     rating: "Rating",
-    recentMentions: "Recent Mentions",
+    recentMentions: "Letzte Erwähnungen",
     toolNotFound: "Tool nicht gefunden.",
     selectModel: "Modell wählen",
     all: "Alle",
     llms: "🧠 LLMs",
     tools: "🔧 Tools",
+    errorLoading: "Fehler beim Laden der Daten.",
+    search: "Suche",
+    searchPlaceholder: "Tools suchen...",
+    noResults: "Keine Ergebnisse gefunden.",
+    days7: "7T",
+    outOf: "von",
+    recentlySearched: "Zuletzt gesucht",
+    trending: "Trending",
+    remove: "Entfernen",
   },
 };
 

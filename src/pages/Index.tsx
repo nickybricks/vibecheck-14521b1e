@@ -10,7 +10,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 const Index = () => {
   const [activeTab, setActiveTab] = useState("all");
   const { data: tools, isLoading, error } = useTools();
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   const filteredTools = tools?.filter((tool) => {
     if (activeTab === "all") return true;
@@ -37,9 +37,7 @@ const Index = () => {
         {/* Error State */}
         {error && (
           <div className="text-center py-12">
-            <p className="text-destructive">
-              {language === "de" ? "Fehler beim Laden der Daten." : "Error loading data."}
-            </p>
+            <p className="text-destructive">{t("errorLoading")}</p>
           </div>
         )}
 

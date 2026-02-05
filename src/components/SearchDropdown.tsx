@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, Clock, X, TrendingUp } from "lucide-react";
 import { useTools } from "@/hooks/useTools";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const RECENT_SEARCHES_KEY = "vibecheck_recent_searches";
 const MAX_RECENT_SEARCHES = 5;
@@ -46,6 +47,7 @@ const SearchDropdown = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { data: tools } = useTools();
+  const { t } = useLanguage();
 
   // Load recent searches on mount
   useEffect(() => {
@@ -154,7 +156,7 @@ const SearchDropdown = () => {
         <button
           onClick={(e) => handleRemoveRecent(e, tool.id)}
           className="opacity-0 group-hover:opacity-100 p-1 rounded-md hover:bg-secondary transition-all duration-150"
-          aria-label="Entfernen"
+          aria-label={t("remove")}
         >
           <X className="w-3.5 h-3.5 text-muted-foreground" />
         </button>
@@ -169,7 +171,7 @@ const SearchDropdown = () => {
         <input
           ref={inputRef}
           type="text"
-          placeholder="Search vibecheck"
+          placeholder={t("searchPlaceholder")}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsOpen(true)}
@@ -193,7 +195,7 @@ const SearchDropdown = () => {
                     <div className="px-4 py-2 flex items-center gap-2">
                       <Clock className="w-3.5 h-3.5 text-muted-foreground" />
                       <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                        Zuletzt gesucht
+                        {t("recentlySearched")}
                       </span>
                     </div>
                     {recentSearches.map((search) => renderToolItem(search, { isRecent: true }))}
@@ -206,7 +208,7 @@ const SearchDropdown = () => {
                     <div className="px-4 py-2 flex items-center gap-2">
                       <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
                       <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                        Trending
+                        {t("trending")}
                       </span>
                     </div>
                     {trendingTools.map((tool) => renderToolItem(tool, { isTrending: true }))}
@@ -224,7 +226,7 @@ const SearchDropdown = () => {
                   </div>
                 ) : (
                   <div className="py-6 text-center text-sm text-muted-foreground">
-                    Keine Ergebnisse gefunden
+                    {t("noResults")}
                   </div>
                 )}
               </>

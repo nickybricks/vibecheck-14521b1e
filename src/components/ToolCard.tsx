@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import MiniSparkline from "./MiniSparkline";
+import { useLanguage } from "@/hooks/useLanguage";
 import type { Tool } from "@/types/api";
 
 interface ToolCardProps {
@@ -20,6 +21,7 @@ const formatMentions = (mentions: number): string => {
 
 const ToolCard = ({ tool }: ToolCardProps) => {
   const [imageError, setImageError] = useState(false);
+  const { t } = useLanguage();
   
   const total = tool.sentiment.positive + tool.sentiment.neutral + tool.sentiment.negative;
   const positivePercent = total > 0 ? Math.round((tool.sentiment.positive / total) * 100) : 0;
@@ -61,13 +63,13 @@ const ToolCard = ({ tool }: ToolCardProps) => {
 
           {/* Sentiment Section */}
           <div className="mb-5">
-            <p className="text-xs text-muted-foreground mb-3">Sentiment:</p>
+            <p className="text-xs text-muted-foreground mb-3">{t("sentiment")}:</p>
             <div className="grid grid-cols-2 gap-4">
               {/* Positive */}
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <span className="text-sm">😊</span>
-                  <span className="text-xs text-muted-foreground">Positiv</span>
+                  <span className="text-xs text-muted-foreground">{t("positive")}</span>
                   <span className="text-xs font-semibold text-foreground ml-auto">{positivePercent}%</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
@@ -81,7 +83,7 @@ const ToolCard = ({ tool }: ToolCardProps) => {
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <span className="text-sm">😠</span>
-                  <span className="text-xs text-muted-foreground">Negativ</span>
+                  <span className="text-xs text-muted-foreground">{t("negative")}</span>
                   <span className="text-xs font-semibold text-foreground ml-auto">{negativePercent}%</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
@@ -98,11 +100,11 @@ const ToolCard = ({ tool }: ToolCardProps) => {
           <div className="flex items-center justify-between py-3 border-t border-border/50">
             <div className="flex items-center gap-2">
               <span className="text-sm">📈</span>
-              <span className="text-xs text-muted-foreground">Mentions:</span>
+              <span className="text-xs text-muted-foreground">{t("mentions")}:</span>
               <span className="text-sm font-semibold text-foreground">{formatMentions(tool.mentions)}</span>
             </div>
             <div className={`text-xs font-semibold ${trendColor}`}>
-              {tool.trendPercent7d >= 0 ? "↑" : "↓"}{Math.abs(tool.trendPercent7d)}% (7d)
+              {tool.trendPercent7d >= 0 ? "↑" : "↓"}{Math.abs(tool.trendPercent7d)}% ({t("days7")})
             </div>
           </div>
 
