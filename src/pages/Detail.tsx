@@ -166,15 +166,29 @@ const Detail = () => {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={tool.trendData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <defs>
+                    <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#6BA3D6" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="#6BA3D6" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
                   <XAxis 
                     dataKey="date" 
                     stroke="hsl(var(--muted-foreground))"
                     fontSize={12}
+                    axisLine={false}
+                    tickLine={false}
                   />
                   <YAxis 
                     stroke="hsl(var(--muted-foreground))"
                     fontSize={12}
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => {
+                      if (value >= 1000000) return `${(value / 1000000).toFixed(0)}M`;
+                      if (value >= 1000) return `${(value / 1000).toFixed(0)}k`;
+                      return value;
+                    }}
                   />
                   <Tooltip
                     contentStyle={{
@@ -182,13 +196,15 @@ const Detail = () => {
                       border: "1px solid hsl(var(--border))",
                       borderRadius: "12px",
                     }}
+                    formatter={(value: number) => [value.toLocaleString(), "Mentions"]}
                   />
                   <Line
                     type="monotone"
                     dataKey="mentions"
-                    stroke="hsl(var(--primary))"
+                    stroke="#6BA3D6"
                     strokeWidth={2}
-                    dot={{ fill: "hsl(var(--primary))", strokeWidth: 0, r: 4 }}
+                    dot={false}
+                    fill="url(#trendGradient)"
                   />
                 </LineChart>
               </ResponsiveContainer>
