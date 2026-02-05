@@ -18,15 +18,16 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
 import { useToolDetail, useTools } from "@/hooks/useTools";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { data: tool, isLoading, error } = useToolDetail(id);
   const { data: allTools } = useTools();
 
@@ -69,10 +70,10 @@ const Detail = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Zurück zum Dashboard
+            {t("backToDashboard")}
           </Link>
           <div className="text-center py-12">
-            <p className="text-destructive">Tool nicht gefunden.</p>
+            <p className="text-destructive">{t("toolNotFound")}</p>
           </div>
         </main>
       </div>
@@ -95,7 +96,7 @@ const Detail = () => {
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
-          Zurück zum Dashboard
+          {t("backToDashboard")}
         </Link>
 
         {/* Header Section */}
@@ -121,12 +122,12 @@ const Detail = () => {
             </div>
           </div>
 
-          <Select 
-            value={tool.id} 
+          <Select
+            value={tool.id}
             onValueChange={(value) => navigate(`/detail/${value}`)}
           >
             <SelectTrigger className="w-48 rounded-xl">
-              <SelectValue placeholder="Modell wählen" />
+              <SelectValue placeholder={t("selectModel")} />
             </SelectTrigger>
             <SelectContent>
               {relatedTools.map((relatedTool) => (
@@ -142,15 +143,15 @@ const Detail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <Card className="rounded-2xl border-border/50">
             <CardContent className="p-5">
-              <p className="text-sm text-muted-foreground mb-1">Sentiment</p>
+              <p className="text-sm text-muted-foreground mb-1">{t("sentiment")}</p>
               <p className="text-2xl font-semibold text-[hsl(var(--sentiment-positive))]">
-                {sentimentPercent}% positiv
+                {sentimentPercent}% {t("positivePercent")}
               </p>
             </CardContent>
           </Card>
           <Card className="rounded-2xl border-border/50">
             <CardContent className="p-5">
-              <p className="text-sm text-muted-foreground mb-1">Mentions</p>
+              <p className="text-sm text-muted-foreground mb-1">{t("mentions")}</p>
               <p className="text-2xl font-semibold">{tool.mentions.toLocaleString()}</p>
             </CardContent>
           </Card>
@@ -159,7 +160,7 @@ const Detail = () => {
         {/* Trend Chart */}
         <Card className="rounded-2xl border-border/50 mb-8">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">Trend der letzten 6 Monate</CardTitle>
+            <CardTitle className="text-lg font-semibold">{t("trendLast6Months")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-64">
@@ -217,7 +218,7 @@ const Detail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card className="rounded-2xl border-border/50">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold">Best For</CardTitle>
+              <CardTitle className="text-lg font-semibold">{t("bestFor")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
@@ -235,7 +236,7 @@ const Detail = () => {
           </Card>
           <Card className="rounded-2xl border-border/50">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold">Rating</CardTitle>
+              <CardTitle className="text-lg font-semibold">{t("rating")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2">
@@ -255,7 +256,7 @@ const Detail = () => {
         {/* Recent Mentions */}
         <Card className="rounded-2xl border-border/50">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">Recent Mentions</CardTitle>
+            <CardTitle className="text-lg font-semibold">{t("recentMentions")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

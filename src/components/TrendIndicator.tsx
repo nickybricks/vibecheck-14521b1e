@@ -1,5 +1,6 @@
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface TrendIndicatorProps {
   trend: "up" | "down" | "stable";
@@ -8,21 +9,23 @@ interface TrendIndicatorProps {
 }
 
 const TrendIndicator = ({ trend, value, className }: TrendIndicatorProps) => {
+  const { t } = useLanguage();
+
   const config = {
     up: {
       icon: TrendingUp,
       color: "text-[hsl(var(--trend-up))]",
-      label: "Steigend",
+      label: t("trendUp"),
     },
     down: {
       icon: TrendingDown,
       color: "text-[hsl(var(--trend-down))]",
-      label: "Fallend",
+      label: t("trendDown"),
     },
     stable: {
       icon: Minus,
       color: "text-[hsl(var(--trend-stable))]",
-      label: "Stabil",
+      label: t("trendStable"),
     },
   };
 
