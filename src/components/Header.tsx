@@ -28,14 +28,6 @@ const Header = () => {
           </div>
         </div>
 
-        <nav className="flex items-center gap-6 ml-auto">
-          <Link 
-            to="/" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-          >
-            Dashboard
-          </Link>
-        </nav>
       </div>
     </header>
   );
