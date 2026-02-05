@@ -12,7 +12,10 @@ const Header = () => {
           <span className="text-lg font-semibold tracking-tight">Vibecheck</span>
         </Link>
         
-        <SearchDropdown />
+        {/* Search - hidden on mobile, shown in main content instead */}
+        <div className="hidden md:block flex-1">
+          <SearchDropdown />
+        </div>
       </div>
     </header>
   );
