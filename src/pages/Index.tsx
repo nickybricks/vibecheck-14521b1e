@@ -21,14 +21,6 @@ const Index = () => {
       <Header />
       
       <main className="container mx-auto px-6 pt-24 pb-12">
-        {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold tracking-tight mb-2">AI Radar</h1>
-          <p className="text-muted-foreground">
-            Verfolge die Stimmung und Trends führender AI Tools und LLMs
-          </p>
-        </div>
-
         {/* Tabs */}
         <div className="mb-8">
           <TabFilter activeTab={activeTab} onTabChange={setActiveTab} />
