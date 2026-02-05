@@ -11,7 +11,7 @@ import type { Tool, ToolDetail } from "@/types/api";
 const companyLogos: Record<string, string> = {
   // LLM Companies
   "OpenAI": "https://cdn.worldvectorlogo.com/logos/openai-2.svg",
-  "Anthropic": "https://avatars.githubusercontent.com/u/76263028?s=200&v=4",
+  "Anthropic": "/logos/claude.png",
   "Google": "https://www.google.com/favicon.ico",
   "Meta": "https://avatars.githubusercontent.com/u/69631?s=200&v=4",
   "Mistral AI": "https://avatars.githubusercontent.com/u/132372032?s=200&v=4",
