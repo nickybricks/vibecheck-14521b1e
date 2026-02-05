@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import TabFilter from "@/components/TabFilter";
 import ToolCard from "@/components/ToolCard";
 import ToolCardSkeleton from "@/components/ToolCardSkeleton";
+import SearchDropdown from "@/components/SearchDropdown";
 import { useTools } from "@/hooks/useTools";
 
 const Index = () => {
@@ -21,6 +22,11 @@ const Index = () => {
       <Header />
       
       <main className="container mx-auto px-6 pt-24 pb-12">
+        {/* Mobile Search - above tabs */}
+        <div className="md:hidden mb-4">
+          <SearchDropdown />
+        </div>
+
         {/* Tabs */}
         <div className="mb-8">
           <TabFilter activeTab={activeTab} onTabChange={setActiveTab} />
