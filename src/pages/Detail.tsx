@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import SentimentBar from "@/components/SentimentBar";
@@ -22,11 +22,18 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useToolDetail } from "@/hooks/useTools";
+import { useToolDetail, useTools } from "@/hooks/useTools";
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { data: tool, isLoading, error } = useToolDetail(id);
+  const { data: allTools } = useTools();
+
+  // Get related tools from the same company
+  const relatedTools = allTools?.filter(
+    (t) => t.company === tool?.company
+  ) ?? [];
 
   if (isLoading) {
     return (
@@ -109,14 +116,17 @@ const Detail = () => {
             </div>
           </div>
 
-          <Select defaultValue={tool.currentVersion}>
-            <SelectTrigger className="w-40 rounded-xl">
-              <SelectValue placeholder="Version" />
+          <Select 
+            value={tool.id} 
+            onValueChange={(value) => navigate(`/detail/${value}`)}
+          >
+            <SelectTrigger className="w-48 rounded-xl">
+              <SelectValue placeholder="Modell wählen" />
             </SelectTrigger>
             <SelectContent>
-              {tool.versions.map((version) => (
-                <SelectItem key={version} value={version}>
-                  {version}
+              {relatedTools.map((relatedTool) => (
+                <SelectItem key={relatedTool.id} value={relatedTool.id}>
+                  {relatedTool.name}
                 </SelectItem>
               ))}
             </SelectContent>
