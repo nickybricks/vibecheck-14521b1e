@@ -31,9 +31,8 @@ const ToolCard = ({ tool }: ToolCardProps) => {
     ? "text-[hsl(var(--trend-up))]" 
     : "text-[hsl(var(--trend-down))]";
 
-  const sparklineColor = tool.trendPercent7d >= 0 
-    ? "hsl(var(--trend-up))" 
-    : "hsl(var(--trend-down))";
+  // Sparkline shows sentiment trend - use positive sentiment color
+  const sparklineColor = "hsl(var(--sentiment-positive))";
 
   return (
     <Link to={`/detail/${tool.id}`}>

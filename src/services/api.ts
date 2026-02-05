@@ -1319,13 +1319,29 @@ const mockTools: Tool[] = [
 // =============================================================================
 
 /**
+ * Generate sentiment sparkline data based on current positive sentiment
+ */
+function generateSentimentSparkline(positivePercent: number): number[] {
+  const variance = 5; // +/- 5% variance
+  return Array.from({ length: 7 }, (_, i) => {
+    const progress = i / 6;
+    const base = positivePercent - variance + (variance * 2 * progress);
+    return Math.round(Math.max(0, Math.min(100, base + (Math.random() - 0.5) * 3)));
+  });
+}
+
+/**
  * Fetch all tools/LLMs
  * TODO: Replace with: return fetch(`${BASE_URL}/tools`).then(res => res.json())
  */
 export async function fetchTools(): Promise<Tool[]> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 300));
-  return mockTools;
+  // Transform sparklineData to sentiment values
+  return mockTools.map(tool => ({
+    ...tool,
+    sparklineData: generateSentimentSparkline(tool.sentiment.positive)
+  }));
 }
 
 /**
