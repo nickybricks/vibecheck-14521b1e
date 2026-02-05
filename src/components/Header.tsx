@@ -6,9 +6,9 @@ const Header = () => {
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground text-sm font-semibold">AI</span>
+            <span className="text-primary-foreground text-sm font-semibold">V</span>
           </div>
-          <span className="text-lg font-semibold tracking-tight">AI Radar</span>
+          <span className="text-lg font-semibold tracking-tight">Vibecheck</span>
         </Link>
         
         <nav className="flex items-center gap-6">
