@@ -17,11 +17,25 @@ const MiniSparkline = ({ data, className, color = "hsl(var(--primary))" }: MiniS
   const height = 24;
   const padding = 2;
   
-  const points = data.map((value, index) => {
-    const x = padding + (index / (data.length - 1)) * (width - padding * 2);
-    const y = height - padding - ((value - min) / range) * (height - padding * 2);
-    return `${x},${y}`;
-  }).join(" ");
+  // Generate points
+  const points = data.map((value, index) => ({
+    x: padding + (index / (data.length - 1)) * (width - padding * 2),
+    y: height - padding - ((value - min) / range) * (height - padding * 2),
+  }));
+
+  // Create smooth bezier curve path
+  const path = points.reduce((acc, point, index) => {
+    if (index === 0) {
+      return `M ${point.x},${point.y}`;
+    }
+    
+    const prev = points[index - 1];
+    const tension = 0.3;
+    const cpx1 = prev.x + (point.x - prev.x) * tension;
+    const cpx2 = point.x - (point.x - prev.x) * tension;
+    
+    return `${acc} C ${cpx1},${prev.y} ${cpx2},${point.y} ${point.x},${point.y}`;
+  }, "");
 
   return (
     <svg 
@@ -29,13 +43,12 @@ const MiniSparkline = ({ data, className, color = "hsl(var(--primary))" }: MiniS
       className={cn("w-20 h-6", className)}
       preserveAspectRatio="none"
     >
-      <polyline
-        points={points}
+      <path
+        d={path}
         fill="none"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </svg>
   );
