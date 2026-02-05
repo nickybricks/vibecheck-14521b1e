@@ -11,12 +11,12 @@ import type { Tool, ToolDetail } from "@/types/api";
 const companyLogos: Record<string, string> = {
   // LLM Companies
   "OpenAI": "https://cdn.worldvectorlogo.com/logos/openai-2.svg",
-  "Anthropic": "/logos/claude.png",
+  "Anthropic": "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/claude-color.png",
   "Google": "https://www.google.com/favicon.ico",
   "Meta": "https://avatars.githubusercontent.com/u/69631?s=200&v=4",
   "Mistral AI": "https://avatars.githubusercontent.com/u/132372032?s=200&v=4",
   "DeepSeek": "https://avatars.githubusercontent.com/u/152976972?s=200&v=4",
-  "xAI": "https://avatars.githubusercontent.com/u/141967696?s=200&v=4",
+  "xAI": "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/grok.png",
   "Cohere": "https://avatars.githubusercontent.com/u/54850923?s=200&v=4",
   "Perplexity AI": "https://avatars.githubusercontent.com/u/116132893?s=200&v=4",
   "Alibaba": "https://avatars.githubusercontent.com/u/1961952?s=200&v=4",
