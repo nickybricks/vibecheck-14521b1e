@@ -15,6 +15,8 @@ export interface Tool {
   sentiment: Sentiment;
   mentions: number;
   trend: "up" | "down" | "stable";
+  trendPercent7d: number; // e.g. 23 for +23%
+  sparklineData: number[]; // Last 7 data points for mini sparkline
   type: "llm" | "tool";
 }
 
