@@ -182,8 +182,8 @@ const SearchDropdown = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-xl shadow-lg z-50 overflow-hidden">
-          <ScrollArea className="max-h-96">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-xl shadow-lg z-50 overflow-hidden max-h-96">
+          <ScrollArea className="h-full max-h-96">
             {/* Initial state: Recent + Trending */}
             {showInitialState && (
               <>
