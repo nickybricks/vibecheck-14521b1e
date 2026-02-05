@@ -3,6 +3,7 @@ import { useMemo } from "react";
 type TranslationKey = 
   | "backToDashboard"
   | "sentiment"
+  | "sentimentTrend"
   | "mentions"
   | "trend"
   | "trendUp"
@@ -37,6 +38,7 @@ const translations: Record<string, Translations> = {
   en: {
     backToDashboard: "Back to Dashboard",
     sentiment: "Sentiment",
+    sentimentTrend: "Sentiment Trend (30d)",
     mentions: "Mentions",
     trend: "Trend",
     trendUp: "Rising",
@@ -68,6 +70,7 @@ const translations: Record<string, Translations> = {
   de: {
     backToDashboard: "Zurück zum Dashboard",
     sentiment: "Sentiment",
+    sentimentTrend: "Sentiment Trend (30d)",
     mentions: "Mentions",
     trend: "Trend",
     trendUp: "Steigend",

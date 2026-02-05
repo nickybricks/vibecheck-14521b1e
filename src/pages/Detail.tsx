@@ -157,19 +157,19 @@ const Detail = () => {
           </Card>
         </div>
 
-        {/* Trend Chart */}
+        {/* Sentiment Trend Chart */}
         <Card className="rounded-2xl border-border/50 mb-8">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">{t("trendLast6Months")}</CardTitle>
+            <CardTitle className="text-lg font-semibold">{t("sentimentTrend")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={tool.trendData}>
                   <defs>
-                    <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#6BA3D6" stopOpacity={0.3} />
-                      <stop offset="100%" stopColor="#6BA3D6" stopOpacity={0} />
+                    <linearGradient id="sentimentGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="hsl(var(--sentiment-positive))" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="hsl(var(--sentiment-positive))" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <XAxis 
@@ -186,11 +186,8 @@ const Detail = () => {
                     axisLine={false}
                     tickLine={false}
                     width={40}
-                    tickFormatter={(value) => {
-                      if (value >= 1000000) return `${(value / 1000000).toFixed(0)}M`;
-                      if (value >= 1000) return `${(value / 1000).toFixed(0)}k`;
-                      return value;
-                    }}
+                    domain={[0, 100]}
+                    tickFormatter={(value) => `${value}%`}
                   />
                   <Tooltip
                     contentStyle={{
@@ -198,15 +195,15 @@ const Detail = () => {
                       border: "1px solid hsl(var(--border))",
                       borderRadius: "12px",
                     }}
-                    formatter={(value: number) => [value.toLocaleString(), "Mentions"]}
+                    formatter={(value: number) => [`${value}%`, t("sentiment")]}
                   />
                   <Line
                     type="monotone"
-                    dataKey="mentions"
-                    stroke="#6BA3D6"
+                    dataKey="sentiment"
+                    stroke="hsl(var(--sentiment-positive))"
                     strokeWidth={2}
                     dot={false}
-                    fill="url(#trendGradient)"
+                    fill="url(#sentimentGradient)"
                   />
                 </LineChart>
               </ResponsiveContainer>
