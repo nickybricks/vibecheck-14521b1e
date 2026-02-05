@@ -5,6 +5,83 @@
 import type { Tool, ToolDetail } from "@/types/api";
 
 // =============================================================================
+// LOGO MAPPING - Reliable logo URLs for all companies
+// =============================================================================
+
+const companyLogos: Record<string, string> = {
+  // LLM Companies
+  "OpenAI": "https://cdn.worldvectorlogo.com/logos/openai-2.svg",
+  "Anthropic": "https://storage.googleapis.com/organization-image-assets/anthropic-botAvatarDarkSrcUrl-1721764224573.png",
+  "Google": "https://www.google.com/favicon.ico",
+  "Meta": "https://cdn.worldvectorlogo.com/logos/meta-1.svg",
+  "Mistral AI": "https://avatars.githubusercontent.com/u/132372032?s=200&v=4",
+  "DeepSeek": "https://avatars.githubusercontent.com/u/152976972?s=200&v=4",
+  "xAI": "https://pbs.twimg.com/profile_images/1683325380441128960/yRsRRjGO_400x400.jpg",
+  "Cohere": "https://avatars.githubusercontent.com/u/54850923?s=200&v=4",
+  "Perplexity AI": "https://avatars.githubusercontent.com/u/116132893?s=200&v=4",
+  "Alibaba": "https://cdn.worldvectorlogo.com/logos/alibaba.svg",
+  "01.AI": "https://avatars.githubusercontent.com/u/143047259?s=200&v=4",
+  "Microsoft": "https://cdn.worldvectorlogo.com/logos/microsoft-5.svg",
+  "Databricks": "https://avatars.githubusercontent.com/u/4998052?s=200&v=4",
+  "TII": "https://avatars.githubusercontent.com/u/95152865?s=200&v=4",
+  "Inflection AI": "https://avatars.githubusercontent.com/u/127966711?s=200&v=4",
+  "Moonshot AI": "https://avatars.githubusercontent.com/u/129aborrar5?s=200&v=4",
+  "BigCode": "https://avatars.githubusercontent.com/u/102277556?s=200&v=4",
+  "WizardLM": "https://avatars.githubusercontent.com/u/130567770?s=200&v=4",
+  
+  // Tool Companies
+  "Cursor Inc.": "https://cursor.sh/apple-touch-icon.png",
+  "Lovable": "https://lovable.dev/icon-512x512.png",
+  "Vercel": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
+  "StackBlitz": "https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg",
+  "Replit": "https://replit.com/public/icons/favicon-196.png",
+  "GitHub": "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png",
+  "Codeium": "https://codeium.com/favicon.svg",
+  "Midjourney": "https://www.midjourney.com/apple-touch-icon.png",
+  "Stability AI": "https://avatars.githubusercontent.com/u/100950301?s=200&v=4",
+  "Runway": "https://avatars.githubusercontent.com/u/25898221?s=200&v=4",
+  "Figma": "https://static.figma.com/app/icon/1/icon-192.png",
+  "Notion": "https://www.notion.so/images/favicon.ico",
+  "Jasper AI": "https://avatars.githubusercontent.com/u/89174667?s=200&v=4",
+  "Copy.ai": "https://avatars.githubusercontent.com/u/75654792?s=200&v=4",
+  "Grammarly": "https://static.grammarly.com/assets/files/efe57d016d9efff36da7884c193b646b/favicon-32x32.png",
+  "DeepL": "https://static.deepl.com/img/logo/DeepL_Logo_darkBlue_v2.svg",
+  "Otter.ai": "https://avatars.githubusercontent.com/u/34316882?s=200&v=4",
+  "Descript": "https://avatars.githubusercontent.com/u/22982566?s=200&v=4",
+  "ElevenLabs": "https://avatars.githubusercontent.com/u/101422890?s=200&v=4",
+  "Synthesia": "https://avatars.githubusercontent.com/u/28540323?s=200&v=4",
+  "HeyGen": "https://avatars.githubusercontent.com/u/97590381?s=200&v=4",
+  "Canva": "https://static.canva.com/static/images/favicon-1.ico",
+  "Adobe": "https://www.adobe.com/favicon.ico",
+  "Pika": "https://avatars.githubusercontent.com/u/134440818?s=200&v=4",
+  "Suno": "https://avatars.githubusercontent.com/u/127012573?s=200&v=4",
+  "Udio": "https://avatars.githubusercontent.com/u/161574918?s=200&v=4",
+  "Gamma": "https://avatars.githubusercontent.com/u/88725516?s=200&v=4",
+  "Beautiful.ai": "https://avatars.githubusercontent.com/u/30329723?s=200&v=4",
+  "Tome": "https://avatars.githubusercontent.com/u/60209684?s=200&v=4",
+  "Zapier": "https://cdn.zapier.com/zapier/images/favicon.png",
+  "Make": "https://images.ctfassets.net/qqlj6g4ee76j/2gPlhqHLriGR36sWhmAGdA/a77d1a1e8e4f1b5a8db98efd1c9ece11/android-chrome-192x192.png",
+  "n8n": "https://avatars.githubusercontent.com/u/45487711?s=200&v=4",
+  "LangChain": "https://avatars.githubusercontent.com/u/126733545?s=200&v=4",
+  "LlamaIndex": "https://avatars.githubusercontent.com/u/130722866?s=200&v=4",
+  "Hugging Face": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+  "Amazon": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+  "Pinecone": "https://avatars.githubusercontent.com/u/54333248?s=200&v=4",
+  "Weaviate": "https://avatars.githubusercontent.com/u/37794290?s=200&v=4",
+  "Supabase": "https://supabase.com/favicon/favicon-196x196.png",
+  "Base44": "https://avatars.githubusercontent.com/u/128663099?s=200&v=4",
+  "Tempo": "https://avatars.githubusercontent.com/u/135779431?s=200&v=4",
+  "Magic Patterns": "https://avatars.githubusercontent.com/u/128457295?s=200&v=4",
+};
+
+/**
+ * Get logo URL for a company - uses reliable mapping
+ */
+function getCompanyLogo(company: string): string {
+  return companyLogos[company] || `https://logo.clearbit.com/${company.toLowerCase().replace(/\s+/g, '')}.com`;
+}
+
+// =============================================================================
 // MOCK DATA - 50 LLMs + 50 AI Tools
 // =============================================================================
 
@@ -1337,9 +1414,10 @@ function generateSentimentSparkline(positivePercent: number): number[] {
 export async function fetchTools(): Promise<Tool[]> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 300));
-  // Transform sparklineData to sentiment values
+  // Transform sparklineData to sentiment values and apply logo mapping
   return mockTools.map(tool => ({
     ...tool,
+    logo: getCompanyLogo(tool.company),
     sparklineData: generateSentimentSparkline(tool.sentiment.positive)
   }));
 }
@@ -1356,9 +1434,10 @@ export async function fetchToolDetail(id: string): Promise<ToolDetail | null> {
   const tool = mockTools.find((t) => t.id === id);
   if (!tool) return null;
   
-  // Generate detail object
+  // Generate detail object with reliable logo
   return {
     ...tool,
+    logo: getCompanyLogo(tool.company),
     description: `${tool.name} ist ein führendes ${tool.type === "llm" ? "Sprachmodell" : "AI-Tool"} von ${tool.company}.`,
     versions: tool.type === "llm" ? ["Latest", "Previous"] : ["v2.0", "v1.0"],
     currentVersion: tool.type === "llm" ? "Latest" : "v2.0",
