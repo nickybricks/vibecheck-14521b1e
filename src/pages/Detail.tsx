@@ -240,7 +240,7 @@ const Detail = () => {
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2">
-                <span className="text-3xl font-semibold">{tool.rating}</span>
+                <span className="text-3xl font-semibold">{tool.rating.toFixed(1)}</span>
                 <span className="text-muted-foreground">/ 5.0</span>
               </div>
               <SentimentBar 
