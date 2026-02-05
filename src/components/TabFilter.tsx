@@ -1,17 +1,20 @@
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface TabFilterProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
 }
 
-const tabs = [
-  { id: "all", label: "All" },
-  { id: "llms", label: "🧠 LLMs" },
-  { id: "tools", label: "🔧 Tools" },
-];
-
 const TabFilter = ({ activeTab, onTabChange }: TabFilterProps) => {
+  const { t } = useLanguage();
+
+  const tabs = [
+    { id: "all", label: t("all") },
+    { id: "llms", label: t("llms") },
+    { id: "tools", label: t("tools") },
+  ];
+
   return (
     <div className="flex items-center gap-2 p-1 bg-secondary rounded-full">
       {tabs.map((tab) => (
