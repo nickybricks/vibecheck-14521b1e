@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
+import SearchDropdown from "./SearchDropdown";
 
 const Header = () => {
   return (
@@ -12,22 +12,7 @@ const Header = () => {
           <span className="text-lg font-semibold tracking-tight">Vibecheck</span>
         </Link>
         
-        {/* Search Bar - Disabled */}
-        <div className="flex-1 max-w-md">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search vibecheck"
-              disabled
-              className="w-full h-10 pl-10 pr-10 rounded-xl bg-secondary/60 border-0 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-medium bg-background/80 px-1.5 py-0.5 rounded border border-border">
-              /
-            </div>
-          </div>
-        </div>
-
+        <SearchDropdown />
       </div>
     </header>
   );
