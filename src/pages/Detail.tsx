@@ -89,7 +89,7 @@ const Detail = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-6 pt-24 pb-12">
+      <main className="container mx-auto px-6 pt-6 pb-12">
         {/* Back Link */}
         <Link 
           to="/" 
